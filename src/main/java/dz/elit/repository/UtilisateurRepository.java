@@ -1,9 +1,10 @@
 package dz.elit.repository;
 
-import dz.elit.model.Roles;
 import dz.elit.model.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface UtilisateurRepository extends JpaRepository<Utilisateur,Integer> {
-    //Utilisateur findByCode(String code);
+    Optional<Utilisateur> findUtilisateurByEmail(String email );
 }

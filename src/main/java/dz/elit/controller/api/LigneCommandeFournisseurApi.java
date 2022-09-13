@@ -1,27 +1,19 @@
 package dz.elit.controller.api;
 
-import dz.elit.dto.CategoryDto;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import dz.elit.dto.CommandeFournisseurDto;
 
 import java.util.List;
 
-import static dz.elit.utils.Constants.APP_ROOT;
 
 public interface LigneCommandeFournisseurApi {
-    @PostMapping(value = APP_ROOT+"/category/create",consumes =
-            MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    CategoryDto save(@RequestBody CategoryDto categoryDto);// pour la deserailisation des objets json vers ojbect dto
 
-    @GetMapping(value = APP_ROOT+"/category/findById/{idCategory}", produces = MediaType.APPLICATION_JSON_VALUE)
-    CategoryDto findById(@PathVariable("idCategory") Integer id);
+    CommandeFournisseurDto save(CommandeFournisseurDto commandeFournisseurDto);
 
-    @GetMapping (value = APP_ROOT+"/category/findByCode/{codeCategory}", produces = MediaType.APPLICATION_JSON_VALUE)
-    CategoryDto findByCodeCategory(@PathVariable("codeArticle") String code);
+    CommandeFournisseurDto findById(Integer id);
 
-    @GetMapping (value = APP_ROOT+"/category/ALL", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<CategoryDto> findAll();
+    CommandeFournisseurDto findByCode(String code);
 
-    @DeleteMapping(value = APP_ROOT+"/category/delete/{id}")
-    void delete(@PathVariable("id") Integer id);
+    List<CommandeFournisseurDto> findAll();
+
+    void delete(Integer commandeFournisseurDtoId);
 }

@@ -5,9 +5,7 @@ import dz.elit.controller.api.ArticleApi;
 import dz.elit.dto.ArticleDto;
 import dz.elit.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,7 +15,7 @@ public class ArticleController implements ArticleApi {
 
     //@Autowired// field injection
 
-    @Autowired
+
 //    @Qualifier("articleServiceImpl")
     private ArticleService articleService;
 
@@ -35,8 +33,6 @@ public class ArticleController implements ArticleApi {
 
     @Override
     public ArticleDto save(ArticleDto articleDto) {
-        System.out.println("articleDto"+articleDto.getCode());
-        System.out.println("articleDto"+articleDto.getDesignation());
         return articleService.save(articleDto);
 
     }

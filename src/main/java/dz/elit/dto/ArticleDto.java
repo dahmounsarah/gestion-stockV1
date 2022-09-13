@@ -2,13 +2,8 @@ package dz.elit.dto;
 
 
 import dz.elit.model.Article;
-import dz.elit.model.Category;
 import lombok.Builder;
 import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 
 @Data
@@ -17,17 +12,11 @@ import javax.persistence.ManyToOne;
 public class ArticleDto {
 
     private Integer id;
-
     private String code;
-
     private String designation;
-
     private String prixUnitaire;
-
     private String tauxTva;
-
     private String photo;
-
     private CategoryDto categoryDto;
 
 
@@ -35,7 +24,9 @@ public class ArticleDto {
         if (article == null)
             return null;
         else
-            return ArticleDto.builder().id(article.getId()).code(article.getCode()).designation(article.getDesignation()).
+            return ArticleDto.builder().id(article.getId()).
+                    code(article.getCode()).
+                    designation(article.getDesignation()).
                     categoryDto(CategoryDto.fromEntity(article.getCategory())).build();
     }
 

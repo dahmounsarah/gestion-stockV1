@@ -28,13 +28,13 @@ public class AbstractEntity implements Serializable {
 	// pourquoi datecreation et modiifcation null
 	@CreatedDate
 	//instant pour java 11
-	@JsonIgnore
-	@Column(name="created_date")
+
+	@Column(name="created_date",updatable = false)
 	private  Date createdDate;
 	
 	@LastModifiedDate
 	// attribut pas obligatoire pour l'invocation de ID
-	@JsonIgnore
+
 	@Column(name="last_modified_date")
 	private Date lastModifiedDate;
 	

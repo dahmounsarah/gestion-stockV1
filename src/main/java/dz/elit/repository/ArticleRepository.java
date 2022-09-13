@@ -1,19 +1,16 @@
 package dz.elit.repository;
 
 import dz.elit.model.Article;
-import dz.elit.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
-import java.util.Optional;
 
 
-
-@RepositoryRestResource
+//@RepositoryRestResource
+// pour les projets poc pour convaicare le client
+// travail les multi module dans le meme projet avec les micro-services ou avec des projet spary
 public interface ArticleRepository extends JpaRepository<Article,Integer> {
+
 
 //    Ajout de méthodes dans une interface de repository
 //            L’interface JpaRepository<T, ID> déclare beaucoup de
@@ -29,7 +26,7 @@ public interface ArticleRepository extends JpaRepository<Article,Integer> {
 //    // la couche DAO
  //   Article find
 
-    Optional<Article> findByCode(String code);
+    List<Article> findByCode(String code);
 
 
 //    @Query("select a from Article a where a.code =: code and a.designation =: designation")

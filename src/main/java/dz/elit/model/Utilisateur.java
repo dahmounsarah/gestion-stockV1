@@ -2,10 +2,7 @@ package dz.elit.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -25,12 +22,18 @@ public class Utilisateur extends AbstractEntity{
     @Column(name = "pwd")
     private String pwd;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "date_naissance")
     private Date dateNaissance;
 
 
     @Embedded // champ compose
     private Address address;
+    @ManyToOne
+    @JoinColumn(name = "id_enreprise")
+    private Entreprise entreprise;
 
 
 

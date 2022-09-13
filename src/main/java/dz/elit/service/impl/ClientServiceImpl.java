@@ -15,6 +15,7 @@ import java.util.List;
 @Slf4j
 public class ClientServiceImpl implements ClientService {
 
+    @Autowired
     private ClientRepository clientRepository;
 
     @Autowired// une injection par contructeur
@@ -33,6 +34,8 @@ public class ClientServiceImpl implements ClientService {
             return null;
         }
     }
+
+
 
     @Override
     public ClientDto findById(Integer id) {

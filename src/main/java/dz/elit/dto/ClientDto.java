@@ -7,48 +7,38 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @Builder
 public class ClientDto {
 
     private Integer id;
-
     private String nom;
-
-
     private String prenom;
-
-
     private String raisonSocail;
-
     @Embedded // champ compose
     private AddressDto address;
-
-
     private String photo;
-
-
     private String mail;
-
-
     private String numTel;
 
     @JsonIgnore
     private List<CommandeClientDto> commandeClients;
 
-    public static ClientDto fromEntity(Client client){
-        if(client==null){
+    public static ClientDto fromEntity(Client client) {
+        if (client == null) {
             return null;
-        }else{
+        } else {
             return ClientDto.builder().
-                    id(client.getId())
-                   // commandeClients(client.getCommandeClients().stream().map(CommandeClientDto::fromEntity).collect(Collectors.toList()))
-                           .build();
+                    id(client.getId()).
+                    nom(client.getNom())
+                    .build();
 
         }
 
     }
+
     public static Client toEntity(ClientDto clientDto) {
         if (clientDto == null) {
             return null;

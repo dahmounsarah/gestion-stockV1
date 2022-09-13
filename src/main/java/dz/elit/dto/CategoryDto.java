@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Data
@@ -26,13 +25,9 @@ public class CategoryDto {
         if (category == null) {
             return null;
         } else {
-            //System.out.println(category.getId());
-//            CategoryDto categoryDto = new CategoryDto();
-//            categoryDto.setId(category.getId());
-//            categoryDto.setCode(category.getCode());
-//            categoryDto.setArticleDtos(category.getArticles().stream().map(ArticleDto::fromEntity).collect(Collectors.toList());
-            return CategoryDto.builder().id(category.getId()).code(category.getCode())
-                    .articleDtos(category.getArticles().stream().map(ArticleDto::fromEntity).collect(Collectors.toList())).build();
+          return CategoryDto.builder().id(category.getId()).code(category.getCode())
+                    .build();
+
         }
     }
 

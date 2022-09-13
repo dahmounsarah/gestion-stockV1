@@ -1,29 +1,28 @@
 package dz.elit.controller.api;
 
-import dz.elit.dto.ArticleDto;
-import org.springframework.http.MediaType;
+import dz.elit.dto.ClientDto;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 import static dz.elit.utils.Constants.APP_ROOT;
 
+@Api(APP_ROOT+"/clients")
 public interface ClientApi {
-    @PostMapping(value = APP_ROOT+"/articles/create",consumes =
-            MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    ArticleDto save(@RequestBody ArticleDto articleDto);// pour la deserailisation des objets json vers ojbect dto
+    @PostMapping(value = APP_ROOT+"/clients/create")
+    ClientDto save(@RequestBody ClientDto clientDto);
+    @GetMapping(APP_ROOT+"/clients/fincById/{id}")
+    ClientDto findById(@PathVariable("id") Integer id);
 
-    @GetMapping (value = APP_ROOT+"/articles/findById/{idArticle}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ArticleDto findById(@PathVariable("idArticle") Integer id);
+    @GetMapping(APP_ROOT+"/clients/fincById/findByNom")
+    ClientDto findByNom(@PathVariable("nom")  String nom);
+    @GetMapping(APP_ROOT+"/clients/fincById/all")
+    List<ClientDto> findAll();
 
-    @GetMapping (value = APP_ROOT+"/articles/findByCode/{codeArticle}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ArticleDto findByCodeArticle(@PathVariable("codeArticle") String code);
 
-    @GetMapping (value = APP_ROOT+"/articles/ALL", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<ArticleDto> findAll();
-
-    @DeleteMapping(value = APP_ROOT+"/articles/delete/{id}")
-    void delete(@PathVariable("id") Integer id);
+    @DeleteMapping(value = APP_ROOT+"/clients/delete/{id}")
+    void delete(@PathVariable("id") Integer clientDtoId);
 
 
 

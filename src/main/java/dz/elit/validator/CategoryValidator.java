@@ -10,7 +10,7 @@ public class CategoryValidator {
 
     public  static  List<String> validate(CategoryDto categoryDto){
         List<String> errors= new ArrayList<>();
-        if(categoryDto==null || StringUtils.hasLength(categoryDto.getCode()))
+        if(categoryDto==null || !StringUtils.hasLength(categoryDto.getCode()))
             errors.add("Veuillez saisir le code categorie");
         return errors;
 

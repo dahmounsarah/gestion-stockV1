@@ -1,14 +1,11 @@
 package dz.elit.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import dz.elit.model.Article;
 import dz.elit.model.CommandeClient;
 import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 
 @Data
@@ -16,13 +13,9 @@ import java.util.Optional;
 public class CommandeClientDto {
 
     private Integer id;
-
     private String code;
-
     private Date dateCommande;
-
     private ClientDto clientDto;
-
     private List<LigneCommandeClientDto> ligneCommandeClientDtos;
 
     public static CommandeClientDto fromEntity(CommandeClient commandeClient) {

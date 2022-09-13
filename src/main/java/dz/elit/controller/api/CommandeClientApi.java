@@ -1,30 +1,31 @@
 package dz.elit.controller.api;
 
-import dz.elit.dto.ArticleDto;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import dz.elit.dto.CommandeClientDto;
+import io.swagger.annotations.Api;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import static dz.elit.utils.Constants.APP_ROOT;
 
+@Api(APP_ROOT+"/commandesclient")
 public interface CommandeClientApi {
-    @PostMapping(value = APP_ROOT+"/articles/create",consumes =
+    @PostMapping(value = APP_ROOT+"/commandesclient/create",consumes =
             MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    ArticleDto save(@RequestBody ArticleDto articleDto);// pour la deserailisation des objets json vers ojbect dto
+    ResponseEntity<CommandeClientDto> save(@RequestBody CommandeClientDto commandeClientDto);
 
-    @GetMapping (value = APP_ROOT+"/articles/findById/{idArticle}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ArticleDto findById(@PathVariable("idArticle") Integer id);
+    @GetMapping(APP_ROOT+"/commandesclient/fincById/{id}")
+     ResponseEntity<CommandeClientDto> findById(@PathVariable("id") Integer id);
 
-    @GetMapping (value = APP_ROOT+"/articles/findByCode/{codeArticle}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ArticleDto findByCodeArticle(@PathVariable("codeArticle") String code);
+    @GetMapping(APP_ROOT+"/commandesclient/fincById/{code}")
+    ResponseEntity<CommandeClientDto> findByCode(@PathVariable("code") String code);
 
-    @GetMapping (value = APP_ROOT+"/articles/ALL", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<ArticleDto> findAll();
+//    @GetMapping(value = APP_ROOT+"/commandesclient/all", produces = MediaType.APPLICATION_JSON_VALUE)
+//    ResponseEntity<List<CommandeClientDto>> findAll();
 
-    @DeleteMapping(value = APP_ROOT+"/articles/delete/{id}")
-    void delete(@PathVariable("id") Integer id);
-
+    @DeleteMapping(value = APP_ROOT+"/commandesclient/delete/{id}")
+    ResponseEntity delete(@PathVariable("id") Integer commandeClientDtoId);
 
 
 }

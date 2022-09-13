@@ -1,16 +1,19 @@
 package dz.elit.service.impl;
 
-import dz.elit.dto.CommandeClientDto;
 import dz.elit.dto.CommandeFournisseurDto;
-import dz.elit.dto.LigneCommandeClientDto;
 import dz.elit.dto.LigneCommandeFournisseurDto;
 import dz.elit.exception.EntityNotFoundException;
 import dz.elit.exception.ErrorCodes;
 import dz.elit.exception.InvalidEntityException;
-import dz.elit.model.*;
-import dz.elit.repository.*;
+import dz.elit.model.Article;
+import dz.elit.model.CommandeFounisseur;
+import dz.elit.model.Fournisseur;
+import dz.elit.model.LigneCommandeFournisseur;
+import dz.elit.repository.ArticleRepository;
+import dz.elit.repository.CommandeFournisseurRepository;
+import dz.elit.repository.FournisseurRepository;
+import dz.elit.repository.LigneCommandeFournisseurRepository;
 import dz.elit.service.CommandeFournisseurService;
-import dz.elit.validator.CommandeClientValidator;
 import dz.elit.validator.CommandeFournisseurValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +30,6 @@ import java.util.stream.Collectors;
 public class CommandeFournisseurServiceImpl implements CommandeFournisseurService {
 
     private CommandeFournisseurRepository commandeFournisseurRepository ;
-
     private LigneCommandeFournisseurRepository ligneCommandeFournisseurRepository;
     private FournisseurRepository fournisseurRepository;
     private ArticleRepository articleRepository;
@@ -56,7 +58,7 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
         Optional<Fournisseur> fournisseur = fournisseurRepository.findById(commandeFournisseurDto.getFournieeurDto().getId());
         if (!fournisseur.isPresent()) {
             log.warn("Le fournisseur n'existe pas avec le id {}" + commandeFournisseurDto.getFournieeurDto().getId());
-            throw new EntityNotFoundException("Le client n'existe pas ", ErrorCodes.CLIENT_NOT_FOUND);
+            throw new EntityNotFoundException("Le fournisseur n'existe pas ", ErrorCodes.CLIENT_NOT_FOUND);
         }
         List<String> articlesErrors = new ArrayList<>();
         if (commandeFournisseurDto.getLigneCommandeFournisseurDtos() != null)
@@ -74,7 +76,7 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
             );
         if (!articlesErrors.isEmpty()) {
             log.warn("L'article n'existe pas dans la  base de données ");
-            throw new InvalidEntityException("L'artcile n'exte pas", ErrorCodes.ARTICLE_NOT_FOUND, articlesErrors);
+            throw new InvalidEntityException("L'article n'exsite pas", ErrorCodes.ARTICLE_NOT_FOUND, articlesErrors);
         }
 
         CommandeFounisseur commandeFounisseurSaved = commandeFournisseurRepository.save(CommandeFournisseurDto.toEntity(commandeFournisseurDto));

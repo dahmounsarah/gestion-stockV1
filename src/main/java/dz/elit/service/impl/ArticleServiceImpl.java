@@ -36,8 +36,7 @@ public class ArticleServiceImpl implements ArticleService {
             throw new InvalidEntityException("Invalide article", ErrorCodes.ARTICLE_INVALID, errors);
         } else {
             return ArticleDto.fromEntity(
-                    articleRepository.save(ArticleDto.toEntity
-                            (articleDto))
+                    articleRepository.save(ArticleDto.toEntity(articleDto))
             );
         }
 
@@ -66,7 +65,7 @@ public class ArticleServiceImpl implements ArticleService {
             return null;
         } else {
             // pour get
-            Optional<Article> article = articleRepository.findByCode(code);
+            Optional<Article> article = Optional.ofNullable(articleRepository.findByCode(code).get(0));
             //ArticleDto articleDto=ArticleDto.fromEntity(article.get());
             return Optional.of(ArticleDto.fromEntity(article.get())).
                     orElseThrow(() -> new EntityNotFoundException("Aucun article n'est trouve ave" +

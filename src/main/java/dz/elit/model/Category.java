@@ -1,14 +1,9 @@
 package dz.elit.model;
 
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-
 import lombok.*;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -24,5 +19,10 @@ public class Category extends AbstractEntity{
 	
 	@OneToMany(mappedBy="category")
 	private List<Article> articles;
+
+	@ManyToOne
+	@JoinColumn(name = "id_entreprise")
+	private Entreprise entreprise;
+
 
 }

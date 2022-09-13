@@ -4,7 +4,6 @@ import dz.elit.dto.CategoryDto;
 import dz.elit.exception.EntityNotFoundException;
 import dz.elit.exception.ErrorCodes;
 import dz.elit.exception.InvalidEntityException;
-import dz.elit.model.Category;
 import dz.elit.repository.CategoryRepository;
 import dz.elit.service.CategoryService;
 import dz.elit.validator.CategoryValidator;
@@ -30,13 +29,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category save(CategoryDto categoryDto) {
+    public CategoryDto save(CategoryDto categoryDto) {
         List<String> errors = CategoryValidator.validate(categoryDto);
         if (!errors.isEmpty()) {
             log.error("Categorie not valide {}" + categoryDto);
             throw new InvalidEntityException("Invalide article", ErrorCodes.ARTICLE_INVALID, errors);
         } else {
-            return categoryRepository.save(CategoryDto.toEntity(categoryDto));
+            return CategoryDto.fromEntity(categoryRepository.save(CategoryDto.toEntity(categoryDto)));
         }
 
 
@@ -56,8 +55,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     }
 
+
     @Override
-    public CategoryDto findByCodeArticle(String code) {
+    public CategoryDto findByCodeCategory(String code) {
         if (!StringUtils.hasLength(code)) {
             log.error("Error code est vide");
             return null;}

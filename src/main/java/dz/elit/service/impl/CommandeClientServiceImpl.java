@@ -57,9 +57,12 @@ public class CommandeClientServiceImpl implements CommandeClientService {
                     ErrorCodes.COMMANDE_CLEINT_NOT_VALID, errros);
         }
         // faire la validation metier
+
         Optional<Client> client = clientRepository.findById(commandeClientDto.getClientDto().getId());
-        if (!client.isPresent()) {
-            log.warn("Le cleint n'existe pas avec le id {}" + commandeClientDto.getClientDto().getId());
+        log.warn("++++++client"+client );
+
+        if (client==null) {
+            log.warn("Le client n'existe pas avec le id {}" + commandeClientDto.getClientDto().getId());
             throw new EntityNotFoundException("Le client n'existe pas ", ErrorCodes.CLIENT_NOT_FOUND);
         }
         List<String> articlesErrors = new ArrayList<>();
@@ -68,10 +71,10 @@ public class CommandeClientServiceImpl implements CommandeClientService {
                         if (commandeClDto.getArticleDto() != null) {
                             Optional<Article> article = articleRepository.findById(commandeClDto.getArticleDto().getId());
                             if (!article.isPresent()) {
-                                articlesErrors.add("L'article n'existe pas dans la base de données ");
+                                articlesErrors.add("la  n'existe pas dans la base de données ");
                             }
                         } else {
-                            articlesErrors.add("Impossible d'enregistre ligne ommande avec article vide ");
+                            articlesErrors.add("Impossible d'enregistre ligne commande avec article vide ");
 
                         }
                     }
@@ -79,8 +82,8 @@ public class CommandeClientServiceImpl implements CommandeClientService {
 
 
         if (!articlesErrors.isEmpty()) {
-            log.warn("L'article n'existe pas dans la  base de donées ");
-            throw new InvalidEntityException("L'artcile n'exte pas", ErrorCodes.ARTICLE_NOT_FOUND, articlesErrors);
+            log.warn("L'article' n'existe pas dans la  base de donées ");
+            throw new InvalidEntityException("Le client n'exsite pas", ErrorCodes.ARTICLE_NOT_FOUND, articlesErrors);
         }
 
         CommandeClient commandClientSaved = commandeClientRepository.save(CommandeClientDto.toEntity(commandeClientDto));
@@ -134,10 +137,16 @@ public class CommandeClientServiceImpl implements CommandeClientService {
     @Override
     public void delete(Integer commandeClientDtoId) {
         if (commandeClientDtoId == null) {
-            log.error("Le id de client est NULL");
+            log.error("Le id de commande client est NULL");
         } else {
-            commandeClientRepository.deleteById(commandeClientDtoId);
-        }
+            try {
+                commandeClientRepository.deleteById(commandeClientDtoId);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+
+    }
     }
 
 }

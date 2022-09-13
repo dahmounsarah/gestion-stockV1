@@ -1,5 +1,7 @@
 package dz.elit.service;
+
 import dz.elit.dto.EntrepriseDto;
+
 import java.util.List;
 
 public interface EntrepriseService {
@@ -8,7 +10,7 @@ public interface EntrepriseService {
 
     EntrepriseDto findById(Integer id);
 
-    EntrepriseDto findByCodeArticle(String code);
+    EntrepriseDto findByNom(String code);
 
     List<EntrepriseDto> findAll();
 
