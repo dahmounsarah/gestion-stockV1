@@ -1,6 +1,5 @@
 package dz.elit.model;//package model;
 
-import dz.elit.model.AbstractEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,9 +27,12 @@ public class CommandeClient extends AbstractEntity {
     private Client client;
 
 
-
     @OneToMany(mappedBy = "commandeClient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<LigneCommandeClient> ligneCommandeClients;
+
+    @ManyToOne
+    @JoinColumn(name = "id_entreprise")
+    private Entreprise entreprise;
 
 
 

@@ -14,12 +14,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 //@Configuration car la class enableWebsecurity contient l'annotation
 @EnableWebSecurity
-public class SecuriteConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private ApplicationUserDetailsService applicationUserDetailsService;
     @Autowired
-    private ApplicationRequestFilter applicationRequestFilter;
+    private ApplicationRequestFilter  applicationRequestFilter;
 
     // configuration de bc
 //    @Autowired
@@ -31,7 +31,7 @@ public class SecuriteConfiguration extends WebSecurityConfigurerAdapter {
 //    }
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.userDetailsService(applicationUserDetailsService);
+       // auth.userDetailsService(applicationUserDetailsService);
         auth.userDetailsService(applicationUserDetailsService).passwordEncoder(passwordEncoder());
 
     }
@@ -41,40 +41,41 @@ public class SecuriteConfiguration extends WebSecurityConfigurerAdapter {
         // on vas autorise que cette andpoint
 
         http.csrf().disable()
-                .authorizeHttpRequests().antMatchers("/**/authenticate").permitAll().
-                anyRequest().authenticated().and().sessionManagement()
+                .authorizeHttpRequests().
+                antMatchers("/**/authenticate",
+                        "/**/utilisateurs/create",
+                        "/**/entreprises/**",
+                        "/v2/api-docs",
+                        "/swagger-resources",
+                        "/swagger-resources/**",
+                        "/swagger-ui.html",
+                        "/webjars/**",
+                        "/configuration/ui",
+                        "/configuration/security",
+                        "/swagger-ui/**",
+                        "/swagger-ui/index.html",
+                        "/v3/api-docs/**")
+                .permitAll().
+                anyRequest().authenticated().// tous les autres url doit avoir un token valide
+                and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         ;
-        http.addFilterBefore(applicationRequestFilter, UsernamePasswordAuthenticationFilter.class);
+       http.addFilterBefore(applicationRequestFilter, UsernamePasswordAuthenticationFilter.class);
         //car c'est une application local
         //  super.configure(http);
     }
 
-//    protected void configure(HttpSecurity httpSecurity) throws Exception {
-//        // We don't need CSRF for this example
-//        httpSecurity.csrf().disable()
-//                // dont authenticate this particular request
-//                .authorizeRequests().antMatchers("/hello","/authenticate").permitAll().
-//                // all other requests need to be authenticated
-//                        anyRequest().authenticated().and().
-//                // make sure we use stateless session; session won't be used to
-//                // store user's state.
-//                        exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//
-//        // Add a filter to validate the tokens with every request
-//     //   httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-//    }
 
-    @Override
-    @Bean
+
+   @Bean
+    //@Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
     @Bean
-    public static BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-        //return NoOpPasswordEncoder.getInstance();
+    public static  BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();//
+        //  return NoOpPasswordEncoder.getInstance(); PasswordEncoder
     }
 }

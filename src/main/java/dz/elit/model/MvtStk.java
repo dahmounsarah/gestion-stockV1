@@ -2,8 +2,7 @@ package dz.elit.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Builder
@@ -13,5 +12,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "mvt_stk")
 public class MvtStk extends AbstractEntity{
-    private String string;
+
+    @Column(name = "type_stk")
+    private String typeSTK;
+
+
+    @ManyToOne
+    @JoinColumn(name = "id_entreprise")
+    private Entreprise entreprise;
 }

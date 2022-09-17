@@ -1,26 +1,28 @@
 package dz.elit.interceptor;
 
 import org.hibernate.EmptyInterceptor;
-import org.springframework.util.StringUtils;
 
 public class Interceptor extends EmptyInterceptor {
-// @Override
-// public String onPrepareStatement(String sql) {
-//     return super.onPrepareStatement(sql);
-// }
 
-    //shit+T
     @Override
     public String onPrepareStatement(String sql) {
-        System.out.println("je suis dans l'intecepeteur ");
-        if (StringUtils.hasLength(sql) && sql.startsWith("select")) {
-            if(sql.contains("category"))// à verifier
-            if (sql.contains("where")) {
-                sql = sql + " and id_entreprise=1";
-            } else {
-                sql = sql +" where id_entreprise = 1";
-            }
-        }
+        System.out.println(sql);
+//        if (StringUtils.hasLength(sql) && sql.toLowerCase().startsWith("select") /*&&
+//                !sql.toLowerCase().contains("select nextval")*/) {
+//            String entityName = sql.substring(7, sql.indexOf("."));//exemple select utilisateu0_.
+//            String idEntreprise = MDC.get("idEntreprise");
+//
+//            if (StringUtils.hasLength(entityName)
+//                    && !sql.toLowerCase().contains("idEntreprise")
+//                    && !sql.toLowerCase().contains("role")
+//                    && StringUtils.hasLength(idEntreprise)) {
+//                if (sql.toLowerCase().contains("where")) {
+//                    sql = sql + " and " + entityName + ".idEntreprise = " + idEntreprise;
+//                } else {
+//                    sql = sql + " where " + entityName + ".idEntreprise = " + idEntreprise;
+//                }
+//            }
+//        }
         return super.onPrepareStatement(sql);
     }
 }

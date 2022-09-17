@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 @Service("articleServiceImpl")
 @Slf4j// un logger lombok
 public class ArticleServiceImpl implements ArticleService {
+    @Autowired
     private ArticleRepository articleRepository;
 
     @Autowired// une injection par contructeur
