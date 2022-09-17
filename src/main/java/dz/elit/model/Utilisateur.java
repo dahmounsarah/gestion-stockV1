@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 @Data
@@ -14,13 +15,13 @@ import java.util.Date;
 @Entity
 @Table(name = "utilisateur")
 
-public class Utilisateur extends AbstractEntity{
+public class Utilisateur extends AbstractEntity {
 
     @Column(name = "nom")
     private String nom;
 
-    @Column(name = "pwd")
-    private String pwd;
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "email")
     private String email;
@@ -35,6 +36,8 @@ public class Utilisateur extends AbstractEntity{
     @JoinColumn(name = "id_enreprise")
     private Entreprise entreprise;
 
+    @OneToMany(mappedBy = "utilisateur")
+    private List<Roles> roles;
 
 
 }

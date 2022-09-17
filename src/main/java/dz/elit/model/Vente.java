@@ -3,10 +3,7 @@ package dz.elit.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +27,10 @@ public class Vente extends AbstractEntity {
 
     @OneToMany
     private List<LigneVente> ligneVentes;
+
+    @ManyToOne
+    @JoinColumn(name = "id_entreprise")
+    private Entreprise entreprise;
 
 
 }

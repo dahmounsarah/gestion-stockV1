@@ -3,7 +3,6 @@ package dz.elit.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Builder
@@ -14,10 +13,14 @@ import java.util.List;
 @Table(name = "roles")
 public class Roles extends AbstractEntity {
 
-    @Column(name = "roleName")
+    @Column(name = "role_name")
     private String roleName;
 
     @ManyToOne
-    @JoinColumn(name = "idUtilisateur")
+    @JoinColumn(name = "id_utilisateur")
     private Utilisateur utilisateur;
+
+    @ManyToOne
+    @JoinColumn(name = "id_entreprise")
+    private Entreprise entreprise;
 }

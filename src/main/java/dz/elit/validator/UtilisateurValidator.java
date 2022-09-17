@@ -1,6 +1,5 @@
 package dz.elit.validator;
 
-import dz.elit.dto.ArticleDto;
 import dz.elit.dto.UtilisateurDto;
 import org.springframework.util.StringUtils;
 
@@ -20,15 +19,15 @@ public class UtilisateurValidator {
          if(StringUtils.hasLength(utilisateurDto.getNom()))
             errors.add("Veuillez saisir le nom ");
 
-            if (StringUtils.hasLength(utilisateurDto.getPwd()))
+            if (StringUtils.hasLength(utilisateurDto.getPassword()))
                 errors.add("Veuillez saisir le mot de passe ");
             if( utilisateurDto.getDateNaissance()==null)
                 errors.add("Veuillez saisir date de naissanaces ");
 
-            if (utilisateurDto.getAddress() == null) {
+            if (utilisateurDto.getAddressDto() == null) {
                 errors.add("Veuillez saisir l'adresse' ");
             }else {
-                if (StringUtils.hasLength(utilisateurDto.getAddress().getAddressed1()))
+                if (StringUtils.hasLength(utilisateurDto.getAddressDto().getAddressed1()))
                     errors.add("Veuillez saisir l'adresse 1' ");
             }
 

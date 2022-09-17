@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class CategoryServiceImpl implements CategoryService {
 
-
+    @Autowired
     private CategoryRepository categoryRepository;
 
     @Autowired// une injection par contructeur

@@ -1,10 +1,8 @@
 package dz.elit.model;
 
-import javax.persistence.*;
-
-import dz.elit.dto.ClientDto;
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -40,6 +38,10 @@ public class Client extends AbstractEntity{
 
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<CommandeClient> commandeClients;
+
+	@ManyToOne
+	@JoinColumn(name = "id_entreprise")
+	private Entreprise entreprise;
 
 
 

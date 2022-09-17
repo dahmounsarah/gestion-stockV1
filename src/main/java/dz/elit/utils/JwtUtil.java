@@ -4,14 +4,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-@Service
+@Component
 public class JwtUtil {
     //La clé de sécurité
     private String SECRET_KEY = "secret";
@@ -39,11 +39,7 @@ public class JwtUtil {
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
-//    public String generateToken(ExtendedUser userDetails) {
-//        Map<String, Object> claims = new HashMap<>();
-//        return createToken(claims, userDetails);
-//    }
-
+//changement de l'oject userDetail par
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userDetails.getUsername());
@@ -57,9 +53,6 @@ public class JwtUtil {
                // .claim("entreprise","")
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
-
-
-
 
 
     public Boolean validateToken(String token, UserDetails userDetails) {
