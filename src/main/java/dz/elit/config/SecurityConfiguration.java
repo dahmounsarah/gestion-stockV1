@@ -65,6 +65,8 @@ public class SecurityConfiguration {
                 anyRequest().authenticated().// tous les autres url doit avoir un token valide
                 and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // sans etat
+        // par defaut une api restfull on garde pas le status client
         ;
         http.addFilterBefore(applicationRequestFilter, UsernamePasswordAuthenticationFilter.class);
         //car c'est une application local

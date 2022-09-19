@@ -37,7 +37,8 @@ public class Utilisateur extends AbstractEntity {
     private Entreprise entreprise;
 
     @OneToMany(mappedBy = "utilisateur")
-    private List<Roles> roles;
+    private List<Role> roles;
+
 
 
 }

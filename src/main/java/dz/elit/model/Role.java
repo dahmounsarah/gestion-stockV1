@@ -11,7 +11,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "roles")
-public class Roles extends AbstractEntity {
+public class Role extends AbstractEntity {
 
     @Column(name = "role_name")
     private String roleName;

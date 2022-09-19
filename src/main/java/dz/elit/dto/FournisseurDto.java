@@ -1,15 +1,10 @@
 package dz.elit.dto;
 
-import dz.elit.model.Address;
-import dz.elit.model.Client;
-import dz.elit.model.CommandeFounisseur;
 import dz.elit.model.Fournisseur;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.persistence.Embedded;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 @Data
@@ -17,22 +12,14 @@ import java.util.List;
 public class FournisseurDto {
 
     private Integer id;
-
     private String nom;
-
     private String prenom;
-
     private String raisonSocail;
-
     @Embedded // champ compose
     private AddressDto address;
-
     private String photo;
-
     private String mail;
-
     private String numTel;
-
     private List<CommandeFournisseurDto> commandeFounisseurDtos;
 
     public static FournisseurDto fromEntity(Fournisseur fournisseur){

@@ -1,6 +1,6 @@
 package dz.elit.service.impl;
 
-import dz.elit.dto.RolesDto;
+import dz.elit.dto.RoleDto;
 import dz.elit.dto.TypeMvtDto;
 import dz.elit.service.TypeMvtService;
 
@@ -8,22 +8,22 @@ import java.util.List;
 
 public class TypeMvtServiceImpl implements TypeMvtService {
     @Override
-    public TypeMvtDto save(RolesDto rolesDto) {
+    public TypeMvtDto save(RoleDto rolesDto) {
         return null;
     }
 
     @Override
-    public RolesDto findById(Integer id) {
+    public RoleDto findById(Integer id) {
         return null;
     }
 
     @Override
-    public RolesDto findByCodeArticle(String code) {
+    public RoleDto findByCodeArticle(String code) {
         return null;
     }
 
     @Override
-    public List<RolesDto> findAll() {
+    public List<RoleDto> findAll() {
         return null;
     }
 

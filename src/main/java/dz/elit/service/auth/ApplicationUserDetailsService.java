@@ -1,10 +1,10 @@
 package dz.elit.service.auth;
 
-import dz.elit.model.Utilisateur;
-import dz.elit.repository.UtilisateurRepository;
+import dz.elit.dto.UtilisateurDto;
+import dz.elit.model.auth.ExtendedUser;
+import dz.elit.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,15 +17,17 @@ import java.util.List;
 public class ApplicationUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UtilisateurRepository utilisateurRepository;
+    UtilisateurService utilisateurService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-       Utilisateur utilisateur=utilisateurRepository.findUtilisateurByEmail(email);
+       UtilisateurDto utilisateurDto=utilisateurService.findUtilisateurByEmail(email);
 
         List<SimpleGrantedAuthority> authorityList=new ArrayList<>();
-        //utilisateur.getRoles().forEach(roles -> authorityList.add(new SimpleGrantedAuthority(roles.getRoleName())));
-        return new User(utilisateur.getEmail(),utilisateur.getPassword()/*,utilisateurDto.getEntrepriseDto().getId()*/, authorityList);
+        System.out.println(" utilisateurDto.getRolesDto()"+ utilisateurDto.getRolesDto().size());
+        utilisateurDto.getRolesDto().forEach(roles -> authorityList.add(new SimpleGrantedAuthority(roles.getRoleName())));
+        return new ExtendedUser(utilisateurDto.getEmail(),utilisateurDto.getPassword(),
+                /*,utilisateurDto.getEntrepriseDto().getId(),*/ authorityList);
 
     }
 }

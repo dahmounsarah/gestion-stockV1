@@ -1,17 +1,17 @@
 package dz.elit.service;
 
-import dz.elit.dto.RolesDto;
+import dz.elit.dto.RoleDto;
 import dz.elit.dto.TypeMvtDto;
 import java.util.List;
 
 public interface TypeMvtService {
-    TypeMvtDto save(RolesDto rolesDto);
+    TypeMvtDto save(RoleDto rolesDto);
 
-    RolesDto findById(Integer id);
+    RoleDto findById(Integer id);
 
-    RolesDto findByCodeArticle(String code);
+    RoleDto findByCodeArticle(String code);
 
-    List<RolesDto> findAll();
+    List<RoleDto> findAll();
 
     void delete(Integer rolesDtoId);
 }

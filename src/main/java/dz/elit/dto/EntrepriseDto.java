@@ -1,12 +1,10 @@
 package dz.elit.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import dz.elit.model.Address;
 import dz.elit.model.Entreprise;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Embedded;
 import java.util.List;
 
 @Data
@@ -20,8 +18,8 @@ public class EntrepriseDto {
     private String description;
     private String codeFiscal;
     private String photo;
-    @Embedded // champ compose
-    private Address addressDto;
+//    @Embedded // champ compose
+//    private Address addressDto;
     private String telephone;
     private String siteWeb;
     @JsonIgnore

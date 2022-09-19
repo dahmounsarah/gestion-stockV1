@@ -1,6 +1,5 @@
 package dz.elit.dto;
 
-import dz.elit.model.CommandeClient;
 import dz.elit.model.CommandeFounisseur;
 import lombok.Builder;
 import lombok.Data;
@@ -14,13 +13,9 @@ import java.util.List;
 public class CommandeFournisseurDto {
 
     private Integer id;
-
     private String code;
-
     private Date dateCommandeFournisseur;
-
     private FournisseurDto fournieeurDto;
-
     private List<LigneCommandeFournisseurDto> ligneCommandeFournisseurDtos;
 
     public static CommandeFournisseurDto fromEntity(CommandeFounisseur commandeFounisseur) {

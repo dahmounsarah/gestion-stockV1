@@ -1,18 +1,18 @@
 package dz.elit.service;
 
-import dz.elit.dto.RolesDto;
+import dz.elit.dto.RoleDto;
 
 import java.util.List;
 
 public interface RolesService {
 
-    RolesDto save(RolesDto rolesDto);
+    RoleDto save(RoleDto rolesDto);
 
-    RolesDto findById(Integer id);
+    RoleDto findById(Integer id);
 
-    RolesDto findByCodeArticle(String code);
+    RoleDto findByCodeArticle(String code);
 
-    List<RolesDto> findAll();
+    List<RoleDto> findAll();
 
     void delete(Integer rolesDtoId);
 }

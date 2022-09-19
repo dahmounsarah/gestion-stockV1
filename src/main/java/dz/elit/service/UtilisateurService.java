@@ -1,7 +1,6 @@
 package dz.elit.service;
 
 import dz.elit.dto.UtilisateurDto;
-import dz.elit.model.Utilisateur;
 
 import java.util.List;
 
@@ -15,5 +14,5 @@ public interface UtilisateurService {
     List<UtilisateurDto> findAll();
 
     void delete(Integer utilisateurDtoId);
-   Utilisateur findUtilisateurByEmail(String email );
+   UtilisateurDto findUtilisateurByEmail(String email );
 }
