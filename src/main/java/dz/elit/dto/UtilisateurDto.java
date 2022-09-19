@@ -31,7 +31,7 @@ public class UtilisateurDto {
                     .dateNaissance(utilisateur.getDateNaissance())
                     .addressDto(AddressDto.fromEntity(utilisateur.getAddress()))
                     .entrepriseDto(EntrepriseDto.fromEntity(utilisateur.getEntreprise()))
-                    .rolesDto(utilisateur.getRoles().stream().map(RoleDto::fromEntity).collect(Collectors.toList()))
+                    //.rolesDto(utilisateur.getRoles().stream().map(RoleDto::fromEntity).collect(Collectors.toList()))
 
                     .build();
 //    }

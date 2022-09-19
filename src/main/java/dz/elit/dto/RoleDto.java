@@ -19,7 +19,7 @@ public class RoleDto {
         } else {
             return RoleDto.builder().id(role.getId())
                     .roleName(role.getRoleName())
-                   // .utilisateurDto(UtilisateurDto.fromEntity(role.getUtilisateur()))
+                    .utilisateurDto(UtilisateurDto.fromEntity(role.getUtilisateur()))
                     .build();
 
         }
