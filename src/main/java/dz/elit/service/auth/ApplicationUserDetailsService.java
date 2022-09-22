@@ -27,8 +27,8 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 //        System.out.println(" utilisateurDto.getRolesDto()"+ utilisateurDto.getRolesDto().size());
 //        utilisateurDto.getRolesDto().forEach(roles -> authorityList.add(new SimpleGrantedAuthority(roles.getRoleName())));
 //
-        return new ExtendedUser(utilisateurDto.getEmail(),utilisateurDto.getPassword(),
-                /*,utilisateurDto.getEntrepriseDto().getId(),*/ authorityList);
+        return new ExtendedUser(utilisateurDto.getEmail(),utilisateurDto.getPassword()
+                ,utilisateurDto.getEntrepriseDto().getId().toString(),authorityList);
 
     }
 }

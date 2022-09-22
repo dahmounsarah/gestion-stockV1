@@ -10,7 +10,7 @@ import java.util.Collection;
 public class ExtendedUser extends User {// c'est un utilisateur
     @Getter
     @Setter
-    private Integer idEntreprise;
+    private String idEntreprise;
 
 
     public ExtendedUser(String username, String password,
@@ -18,9 +18,9 @@ public class ExtendedUser extends User {// c'est un utilisateur
         super(username, password, authorities);
     }
 
-    public ExtendedUser(String username, String password,Integer idEntreprise,
+    public ExtendedUser(String username, String password,String idEntreprise,
                         Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
-       //this.idEntreprise=idEntreprise;
+       this.idEntreprise=idEntreprise;
     }
 }

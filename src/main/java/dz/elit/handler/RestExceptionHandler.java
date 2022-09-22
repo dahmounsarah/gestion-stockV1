@@ -3,14 +3,17 @@ package dz.elit.handler;
 import dz.elit.exception.EntityNotFoundException;
 import dz.elit.exception.ErrorCodes;
 import dz.elit.exception.InvalidEntityException;
+import org.apache.log4j.spi.ErrorCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestControllerAdvice
@@ -39,7 +42,18 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorDto,badRequest);
     }
 
-
-
+// les erreurs d'authtification
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorDto> handleException(BadCredentialsException exception, WebRequest webRequest){
+        final HttpStatus badRequest = HttpStatus.BAD_REQUEST;// error 400
+        final ErrorDto errorDto = ErrorDto.builder()
+                .code(ErrorCodes.BAD_CREDENTIALS)
+                .codehttp(badRequest.value())
+                .message(exception.getMessage())
+                .errors(Collections.singletonList("Mot de pass incorrect "))
+                // creation dasn REStaticUtil.LOGIN_MOT_PASSE_INCORCTpour les messages
+                .build();
+        return new ResponseEntity<>(errorDto,badRequest);
+    }
 
 }

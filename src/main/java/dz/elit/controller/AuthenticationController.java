@@ -2,9 +2,11 @@ package dz.elit.controller;
 
 import dz.elit.dto.auth.AuthenticationRequest;
 import dz.elit.dto.auth.AuthenticationResponse;
+import dz.elit.model.auth.ExtendedUser;
 import dz.elit.service.auth.ApplicationUserDetailsService;
 import dz.elit.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +28,7 @@ public class AuthenticationController {
     private JwtUtil jwtUtil;
 
     @PostMapping(value = "/authenticate")
-    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+    public ResponseEntity authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -36,7 +38,7 @@ public class AuthenticationController {
         );
         System.out.println("je dans l'authentification");
         final UserDetails userDetails = applicationUserDetailsService.loadUserByUsername(authenticationRequest.getLogin());
-        final String jwt=jwtUtil.generateToken(userDetails);
-        return AuthenticationResponse.builder().jwtToken(jwt).build();
+        final String jwt=jwtUtil.generateToken((ExtendedUser) userDetails);
+        return ResponseEntity.ok( AuthenticationResponse.builder().jwtToken(jwt).build());
     }
 }

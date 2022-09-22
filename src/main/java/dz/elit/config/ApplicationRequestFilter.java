@@ -3,6 +3,7 @@ package dz.elit.config;
 import dz.elit.service.auth.ApplicationUserDetailsService;
 import dz.elit.utils.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,6 +42,7 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
             System.out.println("jwtToken"+jwtToken);
             try {
                username = jwtUtil.extractUsername(jwtToken);
+               idEntreprise=jwtUtil.extractIdEntreprise(jwtToken);
                 System.out.println("username"+username);
             } catch (IllegalArgumentException e) {
                 logger.warn("Unable to get JWT Token");
@@ -76,6 +78,7 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }
+        MDC.put("idEntreprise",idEntreprise);
         filterChain.doFilter(request, response);
     }
 

@@ -1,5 +1,6 @@
 package dz.elit.utils;
 
+import dz.elit.model.auth.ExtendedUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -21,7 +22,7 @@ public class JwtUtil {
     }
     public String extractIdEntreprise(String token) {
         final Claims claims = extractAllClaims(token);
-        return claims.get("entreprise",String.class);
+        return claims.get("idEntreprise",String.class);
     }
 
     public Date extractExpiration(String token) {
@@ -40,17 +41,17 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 //changement de l'oject userDetail par
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(ExtendedUser userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDetails.getUsername());
+        return createToken(claims, userDetails);
     }
 
-    private String createToken(Map<String, Object> claims, String subject) {
+    private String createToken(Map<String, Object> claims, ExtendedUser extendedUser) {
 
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+        return Jwts.builder().setClaims(claims).setSubject(extendedUser.getUsername()).setIssuedAt(new Date(System.currentTimeMillis()))
                 //La durée d'expération du token
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-               // .claim("entreprise","")
+                .claim("idEntreprise",extendedUser.getIdEntreprise())
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
