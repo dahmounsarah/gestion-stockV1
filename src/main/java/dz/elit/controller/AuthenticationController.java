@@ -36,7 +36,6 @@ public class AuthenticationController {
                         authenticationRequest.getPassword()
                 )
         );
-        System.out.println("je dans l'authentification");
         final UserDetails userDetails = applicationUserDetailsService.loadUserByUsername(authenticationRequest.getLogin());
         final String jwt=jwtUtil.generateToken((ExtendedUser) userDetails);
         return ResponseEntity.ok( AuthenticationResponse.builder().jwtToken(jwt).build());
