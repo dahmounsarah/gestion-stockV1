@@ -4,6 +4,7 @@ import dz.elit.dto.CategoryDto;
 import dz.elit.exception.EntityNotFoundException;
 import dz.elit.exception.ErrorCodes;
 import dz.elit.exception.InvalidEntityException;
+import dz.elit.model.Category;
 import dz.elit.repository.CategoryRepository;
 import dz.elit.service.CategoryService;
 import dz.elit.validator.CategoryValidator;
@@ -33,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
         List<String> errors = CategoryValidator.validate(categoryDto);
         if (!errors.isEmpty()) {
             log.error("Categorie not valide {}" + categoryDto);
-            throw new InvalidEntityException("Invalide article", ErrorCodes.ARTICLE_INVALID, errors);
+            throw new InvalidEntityException("Invalide article", ErrorCodes.CATOGORY_NOT_VALID, errors);
         } else {
             return CategoryDto.fromEntity(categoryRepository.save(CategoryDto.toEntity(categoryDto)));
         }
@@ -47,9 +48,17 @@ public class CategoryServiceImpl implements CategoryService {
             log.error("Id catégorie null");
             return null;
         } else {
-            Optional<CategoryDto> categoryDto= Optional.ofNullable(CategoryDto.fromEntity(categoryRepository.findById(id).get()));
-            return Optional.of(categoryDto).orElseThrow(()->new EntityNotFoundException
-                    ("Aucune catégorie trouve avec le id"+id,ErrorCodes.CATOGORY_NOT_FOUD)).get();
+            Optional<Category> category= categoryRepository.findById(id);
+            if (!category.isPresent()) {
+                throw new EntityNotFoundException("Aucune catégorie trouve avec le id",ErrorCodes.CATOGORY_NOT_FOUD);
+            } else {
+                return CategoryDto.fromEntity(category.get());
+
+            }
+// ca marche pas pour les tests
+//            return Optional.of(CategoryDto.fromEntity(category.get())).orElseThrow(()->new EntityNotFoundException
+//                    ("Aucune catégorie trouve avec le id",ErrorCodes.CATOGORY_NOT_FOUD));
+//            // throw  new EntityNotFoundException("Invalide article", ErrorCodes.CATOGORY_NOT_FOUD);
 
         }
 
@@ -60,7 +69,8 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto findByCodeCategory(String code) {
         if (!StringUtils.hasLength(code)) {
             log.error("Error code est vide");
-            return null;}
+            return null;
+        }
         else{
             CategoryDto categoryDto=CategoryDto.fromEntity(categoryRepository.findByCode(code));
             return Optional.of(categoryDto).orElseThrow(()->new EntityNotFoundException  ("Aucune catégorie trouve avec le code"+code,ErrorCodes.CATOGORY_NOT_FOUD));
