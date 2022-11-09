@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static dz.elit.utils.Constants.APP_ROOT;
+import static dz.elit.controller.utils.Constants.APP_ROOT;
 
 @Api(APP_ROOT+"/commandesclient")
 public interface CommandeClientApi {

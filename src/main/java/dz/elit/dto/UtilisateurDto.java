@@ -6,7 +6,6 @@ import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -30,7 +29,7 @@ public class UtilisateurDto {
                     .email(utilisateur.getEmail())
                     .dateNaissance(utilisateur.getDateNaissance())
                     .addressDto(AddressDto.fromEntity(utilisateur.getAddress()))
-                    .entrepriseDto(EntrepriseDto.fromEntity(utilisateur.getEntreprise()))
+                    //.entrepriseDto(EntrepriseDto.fromEntity(utilisateur.getEntreprise()))
                     //.rolesDto(utilisateur.getRoles().stream().map(RoleDto::fromEntity).collect(Collectors.toList()))
 
                     .build();

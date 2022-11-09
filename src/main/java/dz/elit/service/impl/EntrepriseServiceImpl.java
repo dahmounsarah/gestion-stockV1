@@ -1,7 +1,6 @@
 package dz.elit.service.impl;
 
 import dz.elit.dto.EntrepriseDto;
-import dz.elit.dto.RoleDto;
 import dz.elit.dto.UtilisateurDto;
 import dz.elit.exception.EntityNotFoundException;
 import dz.elit.exception.ErrorCodes;
@@ -13,7 +12,6 @@ import dz.elit.service.EntrepriseService;
 import dz.elit.service.UtilisateurService;
 import dz.elit.validator.EntrepriseValidator;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.log4j.spi.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -57,12 +55,12 @@ public class EntrepriseServiceImpl implements EntrepriseService {
         //Sauvgarder l'entreprise
         UtilisateurDto savedUser = utilisateurService.save(utilisateur);
         //Ajouter un role ADMIN pour l'utlisateur
-        RoleDto roleDto = RoleDto.builder()
-                .roleName("ADMIN")
-                .utilisateurDto(savedUser)
-                .build();
-        //Sauvgarder le role
-        rolesRepository.save(RoleDto.toEntity(roleDto));
+//        RoleDto roleDto = RoleDto.builder()
+//                .roleName("ADMIN")
+//                .utilisateurDto(savedUser)
+//                .build();
+//        //Sauvgarder le role
+//        rolesRepository.save(RoleDto.toEntity(roleDto));
         return savedEntreprise;
     }
 

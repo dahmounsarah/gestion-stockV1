@@ -1,9 +1,8 @@
 package dz.elit.config;
 
 import dz.elit.service.auth.ApplicationUserDetailsService;
-import dz.elit.utils.JwtUtil;
+import dz.elit.controller.utils.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
-import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,13 +35,14 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
         String idEntreprise=null;
         // JWT Token is in the form "Bearer token". Remove Bearer word and get
         // only the Token
+        System.out.println(requestTokenHeader);
 
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer")) {
             jwtToken = requestTokenHeader.substring(7);
             System.out.println("jwtToken"+jwtToken);
             try {
                username = jwtUtil.extractUsername(jwtToken);
-               idEntreprise=jwtUtil.extractIdEntreprise(jwtToken);
+              // idEntreprise=jwtUtil.extractIdEntreprise(jwtToken);
                 System.out.println("username"+username);
             } catch (IllegalArgumentException e) {
                 logger.warn("Unable to get JWT Token");
@@ -63,7 +63,7 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = this.applicationUserDetailsService.loadUserByUsername(username);
-
+            System.out.println("je suis ici");
             // if token is valid configure Spring Security to manually set
             // authentication
             if (jwtUtil.validateToken(jwtToken, userDetails)) {
@@ -78,7 +78,7 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }
-        MDC.put("idEntreprise",idEntreprise);
+     //   MDC.put("idEntreprise",idEntreprise);
         filterChain.doFilter(request, response);
     }
 

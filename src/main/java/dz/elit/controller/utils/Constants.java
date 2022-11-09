@@ -1,4 +1,4 @@
-package dz.elit.utils;
+package dz.elit.controller.utils;
 
 public interface Constants {
 

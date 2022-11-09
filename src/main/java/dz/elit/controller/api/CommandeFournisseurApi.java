@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static dz.elit.utils.Constants.APP_ROOT;
+import static dz.elit.controller.utils.Constants.APP_ROOT;
 
 
 @Api(APP_ROOT+"/commandesfournisseur")

@@ -28,7 +28,8 @@ public class CategoryDto {
           return CategoryDto.builder().id(category.getId())
                   .code(category.getCode())
                   .designation(category.getDesignation())
-                  //    .entrepriseDto(EntrepriseDto.fromEntity(category.getEntreprise()))
+                  // null pointer exception
+                   .entrepriseDto(EntrepriseDto.fromEntity(category.getEntreprise()))
                   .build();
 
         }
@@ -43,7 +44,8 @@ public class CategoryDto {
             category.setId(categoryDto.getId());
             category.setCode(categoryDto.getCode());
             category.setDesignation(categoryDto.getDesignation());
-           // category.setEntreprise(EntrepriseDto.toEntity(categoryDto.getEntrepriseDto()));
+            // nul pointer exception
+            category.setEntreprise(EntrepriseDto.toEntity(categoryDto.getEntrepriseDto()));
             return category;
         }
     }

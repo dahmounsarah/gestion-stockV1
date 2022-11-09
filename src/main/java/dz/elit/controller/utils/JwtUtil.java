@@ -1,4 +1,4 @@
-package dz.elit.utils;
+package dz.elit.controller.utils;
 
 import dz.elit.model.auth.ExtendedUser;
 import io.jsonwebtoken.Claims;
@@ -51,7 +51,7 @@ public class JwtUtil {
         return Jwts.builder().setClaims(claims).setSubject(extendedUser.getUsername()).setIssuedAt(new Date(System.currentTimeMillis()))
                 //La durée d'expération du token
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-                .claim("idEntreprise",extendedUser.getIdEntreprise())
+                //.claim("idEntreprise",extendedUser.getIdEntreprise())
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 

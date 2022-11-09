@@ -22,13 +22,14 @@ public class ApplicationUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
        UtilisateurDto utilisateurDto=utilisateurService.findUtilisateurByEmail(email);
+        System.out.println("je ssuis lz ");
 
         List<SimpleGrantedAuthority> authorityList=new ArrayList<>();
 //        System.out.println(" utilisateurDto.getRolesDto()"+ utilisateurDto.getRolesDto().size());
 //        utilisateurDto.getRolesDto().forEach(roles -> authorityList.add(new SimpleGrantedAuthority(roles.getRoleName())));
 //
         return new ExtendedUser(utilisateurDto.getEmail(),utilisateurDto.getPassword()
-                ,utilisateurDto.getEntrepriseDto().getId().toString(),authorityList);
+                ,/*utilisateurDto.getEntrepriseDto().getId().toString(),*/authorityList);
 
     }
 }
